@@ -41,7 +41,7 @@ WITH RECURSIVE trip AS (
       )
 )
 SELECT t.total_cost,
-   t.path tour
+   t.path::VARCHAR tour
 FROM trip t
 WHERE t.path_length = 5
    AND(
