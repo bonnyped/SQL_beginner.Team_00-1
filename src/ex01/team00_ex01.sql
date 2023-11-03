@@ -22,7 +22,7 @@ VALUES ('a', 'b', 10),
 
 WITH RECURSIVE trip AS (SELECT 1 path_length
        , 0.0 AS total_cost
-       , ARRAY [n.point1::bpchar] path
+       , ARRAY [n.point1] path
        , n.point1 last_point
     FROM nodes n
    WHERE n.point1 = 'a' UNION
@@ -36,7 +36,7 @@ SELECT t.path_length + 1
                                         AND n.point2 = 'a')
  )
 SELECT t.total_cost
-     , t.path::varchar tour
+     , t.path tour
   FROM trip t
  WHERE t.path_length = 5
    AND(t.total_cost = (SELECT min(t2.total_cost)
